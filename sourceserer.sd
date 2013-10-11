@@ -1,0 +1,75 @@
+<CsoundSynthesizer>
+<CsOptions>
+; Select audio/midi flags here according to platform
+-odac     ;;;RT audio out
+;-iadc    ;;;uncomment -iadc if RT audio input is needed too
+; For Non-realtime ouput leave only the line below:
+; -o diskgrain.wav -W ;;; for file output any platform
+</CsOptions>
+<CsInstruments>
+
+sr     = 44100
+ksmps  = 32
+nchnls = 2
+0dbfs  = 1
+
+
+giSine    ftgen     0, 0, 2^10, 10, 1
+
+instr1
+iolaps  = 2
+igrsize = 0.04
+ifreq   = iolaps/igrsize
+ips     = 1/iolaps
+
+istr = p4  /* timescale */
+ipitch = p5 /* pitchscale */
+
+a1 diskgrain "Bpm174_Full_Low.wav", 1, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
+kenv      linen     1, p3/4, p3, p3/4
+   outs   kenv*a1, kenv*a1
+
+endin
+
+instr 2
+kamp     =        0.35
+kfreq    =        p4
+ipres1   =        p5
+ipres2   =        p6
+; kpres (bow pressure) defined using a random spline
+kpres    rspline  p5,p6,0.5,2
+krat     =        0.127236
+kvibf    =        4.5
+kvibamp  =        0
+iminfreq =        20
+; call the wgbow opcode
+aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,giSine,iminfreq
+; modulating delay time
+kdel     rspline  0.01,0.1,0.1,0.5
+; bow pressure parameter delayed by a varying time in the right channel
+kpres    vdel_k   kpres,kdel,0.2,2
+aSigR    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,giSine,iminfreq
+         outs     aSigL,aSigR
+endin
+</CsInstruments>
+<CsScore>
+f 1 0 8192 20 2 1  ;Hanning function
+f 2 0 1024 10 1 ; sine
+;           timescale   pitchscale
+i 1   0   25     0.5        1.5
+i 1   + 25     1.1       0.75
+i 1  + 50        0.5        1.0
+i 1  + 20      0.01    1.0
+i 1 + 50 0.25 0.77
+i 1 + 30 0.77 1.6
+
+i 2  10 180  70 0.03 0.1
+i 2  10 180  85 0.03 0.1
+i 2  10 180 100 0.03 0.09
+i 2  10 180 135 0.03 0.09
+i 2  10 180 170 0.02 0.09
+i 2  10 180 202 0.04 0.1
+i 2  10 180 233 0.05 0.11
+e
+</CsScore>
+</CsoundSynthesizer>
