@@ -23,7 +23,7 @@ ips     = 1/iolaps
 istr = p4  /* timescale */
 ipitch = p5 /* pitchscale */
 
-a1 diskgrain "goth-guitar.wav", 1, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
+a1 diskgrain "oud-master.wav", 1, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
    outs   a1, a1
 
 endin
@@ -33,22 +33,21 @@ endin
 f 1 0 8192 20 2 1  ;Hanning function
 
 ;           timescale   pitchscale
-i 1   0   5     1           1
-i 1   +   5     2           1
-i 1   +   5     1          0.75
-i 1   +   5     1.5        1.5
-i 1   +   5     0.5        1.5
+i 1   0   50     1           0.6
+i 1   +   50     2           0.8
+i 1   +   50     1          0.75
+i 1   +   50     1.5        1.5
+i 1   +   150    0.5        1.5
 
 e
 </CsScore>
-</CsoundSynthesizer>
-<bsbPanel>
+</CsoundSynthesizer><bsbPanel>
  <label>Widgets</label>
  <objectName/>
- <x>0</x>
- <y>0</y>
- <width>30</width>
- <height>105</height>
+ <x>880</x>
+ <y>71</y>
+ <width>396</width>
+ <height>861</height>
  <visible>true</visible>
  <uuid/>
  <bgcolor mode="nobackground">
@@ -77,6 +76,18 @@ e
 </bsbPanel>
 <bsbPresets>
 </bsbPresets>
+<MacOptions>
+Version: 3
+Render: Real
+Ask: Yes
+Functions: ioObject
+Listing: Window
+WindowBounds: 880 71 396 861
+CurrentView: io
+IOViewEdit: On
+Options:
+</MacOptions>
+
 <MacGUI>
 ioView nobackground {59367, 11822, 65535}
 ioSlider {5, 5} {20, 100} 0.000000 1.000000 0.000000 slider1
