@@ -7,9 +7,9 @@
 ; -o diskgrain.wav -W ;;; for file output any platform
 </CsOptions>
 <CsInstruments>
-
-sr     = 8000
-ksmps  = 32
+sr = 44100
+kr = 441
+ksmps = 100
 nchnls = 2
 0dbfs  = 1
 
