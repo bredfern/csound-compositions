@@ -25,7 +25,7 @@ ips     = 1/iolaps
 istr = p4  /* timescale */
 ipitch = p5 /* pitchscale */
 
-a1 diskgrain "goth-guitar.wav", 1, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
+a1 diskgrain "assets/goth-guitar.wav", 1, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
 kenv      linen     1, p3/4, p3, p3/4
    outs   kenv*a1, kenv*a1
 

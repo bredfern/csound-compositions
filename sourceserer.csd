@@ -49,7 +49,7 @@ ips     = 1/iolaps
 istr = p4  /* timescale */
 ipitch = p5 /* pitchscale */
 
-a1 diskgrain "oud2.wav", 1, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
+a1 diskgrain "assets/oud2.wav", 1, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
 kenv      linen     1, p3/4, p3, p3/4
    outs   kenv*a1, kenv*a1
 endin
@@ -83,35 +83,4 @@ i 3 + 30 1.3 1.1
 i 3 + 30 0.23 0.23
 e
 </CsScore>
-</CsoundSynthesizer><bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>0</x>
- <y>0</y>
- <width>400</width>
- <height>200</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="nobackground">
-  <r>231</r>
-  <g>46</g>
-  <b>255</b>
- </bgcolor>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>
-<MacOptions>
-Version: 3
-Render: Real
-Ask: Yes
-Functions: ioObject
-Listing: Window
-WindowBounds: 880 71 96 26
-CurrentView: io
-IOViewEdit: On
-Options:
-</MacOptions>
-
-<MacGUI>
-ioView nobackground {59367, 11822, 65535}
-</MacGUI>
+</CsoundSynthesizer>

@@ -1,7 +1,7 @@
 <CsoundSynthesizer>
 <CsOptions>
-;-odac  
--W  -o mystery.wav 
+-odac
+;-W  -o mystery.wav
 </CsOptions>
 <CsInstruments>
 sr = 44100
@@ -19,7 +19,7 @@ kresonance = rnd(10)
 kamp = 10
 kcps = 5
 itype = 4
- 
+
 k1 lfo kamp, kcps + rnd(640), itype
 a1 lowres asig, kcutoff + k1, kresonance
 aL, aR  freeverb a1, a1, rnd(0.9), 0.35, sr, 0
@@ -87,7 +87,7 @@ aRvbL,aRvbR reverbsc gaSend,gaSend,0.9,7000
 </CsInstruments>
 <CsScore>
 f 1 0 32768 10 1
-; Table 
+; Table
 r 19
 t 0 60
 
@@ -105,7 +105,7 @@ i 1 8 4 140
 
 i 2 0 4
 i 2 4 -1
-i 2 5 . 
+i 2 5 .
 i 2 6 .
 i 2 7 .
 i 2 8 4
@@ -185,60 +185,10 @@ i 4 7.40 .
 i 4 7.70 .
 i 4 8.00 .
 
-i 5  0 8  
+i 5  0 8
 
 i 6 0 8
 
 e
 </CsScore>
-</CsoundSynthesizer><bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>880</x>
- <y>477</y>
- <width>396</width>
- <height>455</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="nobackground">
-  <r>231</r>
-  <g>46</g>
-  <b>255</b>
- </bgcolor>
- <bsbObject version="2" type="BSBVSlider">
-  <objectName>slider1</objectName>
-  <x>5</x>
-  <y>5</y>
-  <width>20</width>
-  <height>100</height>
-  <uuid>{92e15bc9-a26c-4fab-8d9b-b2a14c34e4ba}</uuid>
-  <visible>true</visible>
-  <midichan>0</midichan>
-  <midicc>-3</midicc>
-  <minimum>0.00000000</minimum>
-  <maximum>1.00000000</maximum>
-  <value>0.00000000</value>
-  <mode>lin</mode>
-  <mouseControl act="jump">continuous</mouseControl>
-  <resolution>-1.00000000</resolution>
-  <randomizable group="0">false</randomizable>
- </bsbObject>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>
-<MacOptions>
-Version: 3
-Render: Real
-Ask: Yes
-Functions: ioObject
-Listing: Window
-WindowBounds: 880 477 396 455
-CurrentView: io
-IOViewEdit: On
-Options:
-</MacOptions>
-
-<MacGUI>
-ioView nobackground {59367, 11822, 65535}
-ioSlider {5, 5} {20, 100} 0.000000 1.000000 0.000000 slider1
-</MacGUI>
+</CsoundSynthesizer>

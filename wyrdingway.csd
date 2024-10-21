@@ -7,7 +7,7 @@
 ; -o diskgrain.wav -W ;;; for file output any platform
 </CsOptions>
 <CsInstruments>
-sr = 44100 
+sr = 44100
 ksmps  = 32
 nchnls = 2
 
@@ -23,12 +23,12 @@ ips     = 1/iolaps
 istr = p4  /* timescale */
 ipitch = p5 /* pitchscale */
 
-asig diskgrain "oud4.wav", 0.3, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
+asig diskgrain "assets/oud2.wav", 0.3, ifreq, ipitch, igrsize, ips*istr, 1, iolaps
 ; Vary the cutoff frequency from 30 to 300 Hz.
   kcutoff line 10, p3, 300
   kresonance = 0.5
   ; Apply the filter.
-  a1 lowres asig, kcutoff, kresonance 
+  a1 lowres asig, kcutoff, kresonance
 kenv      linen     1, p3/4, p3, p3/4
    outs   kenv*a1, kenv*a1
 
@@ -50,19 +50,19 @@ kenv      linen     1, p3/4, p3, p3/4
 aOut = aOsc1 + aOsc2 + aOsc3 + aOsc4 + aOsc5 + aOsc6 + aOsc7 + aOsc8
           outs aOut*kenv, aOut*kenv
     endin
-    
+
     instr 3
   ibps    = 1.6937
   iplaybackspeed = ibps/p5
   asource diskin p4, iplaybackspeed, 0, 1
- 
+
   asig bbcutm asource, 2.6937, p6, 4, 4, p7, 2, 0.1, 1
  kenv      linen     1, p3/4, p3, p3/4
    outs   kenv*asig, kenv*asig
 endin
 </CsInstruments>
 <CsScore>
-f 1 0 1024 10 1 ; sine 
+f 1 0 1024 10 1 ; sine
 f 2 0 1024 10 1 1 1; 3 harmonics
 f 8 0 8192 10 1;
 
@@ -91,101 +91,51 @@ i 2 180 20 7.00 -21
 i 2 200 40 7.00 -22
 
 ;   source      bps cut repeats
-i 3 10 10 "amen-m.wav" 2.3 8   2 
-i 3 10 10 "oud2.wav" 2.4 8   3
-i 3 10 10 "oud1.wav" 2.5 16  2
-i 3 20  10 "amen-m.wav" 2.3 8   12 
-i 3 20 10 "oud2.wav" 2.4 8   3
-i 3 20 10 "oud1.wav" 2.5 16  2
-i 3 30  10 "amen-m.wav" 2.3 8   12 
-i 3 30  10 "oud2.wav" 2.4 8   13
-i 3 30  10 "oud1.wav" 2.5 16  2
-i 3 40  10 "amen-m.wav" 2.3 8   2 
-i 3 40  10 "oud2.wav" 2.4 8   3
-i 3 40  10 "oud1.wav" 2.5 16  12
-i 3 50  10 "amen-m.wav" 2.3 8   2 
-i 3 50 10 "oud2.wav" 2.4 8   3
-i 3 50  10 "oud1.wav" 2.5 16  22
-i 3 60  10 "amen-m.wav" 2.3 8   2 
-i 3 60  10 "oud2.wav" 2.4 8   33
-i 3 60  10 "oud1.wav" 2.5 16  2
-i 3 70  10 "amen-m.wav" 2.3 8   12 
-i 3 70  10 "oud2.wav" 2.4 8   3
-i 3 70  10 "oud1.wav" 2.5 16  2
-i 3 100  10 "amen-m.wav" 2.3 8   2 
-i 3 100  10 "oud2.wav" 2.4 8   3
-i 3 100  10 "oud1.wav" 2.5 16  12
-i 3 110  10 "amen-m.wav" 2.3 8   2 
-i 3 110  10 "oud2.wav" 2.4 8   23
-i 3 110  10 "oud1.wav" 2.5 16  2
-i 3 120  10 "amen-m.wav" 2.3 8   2 
-i 3 120  10 "oud2.wav" 2.4 8   3
-i 3 120  10 "oud1.wav" 2.5 16  2
-i 3 130  10 "amen-m.wav" 2.3 8   2 
-i 3 130  10 "oud2.wav" 2.4 8   23
-i 3 130  10 "oud1.wav" 2.5 16  12
-i 3 140  10 "amen-m.wav" 2.3 8   12 
-i 3 140  10 "oud2.wav" 2.4 8   3
-i 3 140  10 "oud1.wav" 2.5 16  22
-i 3 150  10 "amen-m.wav" 2.3 8   2 
-i 3 150  10 "oud2.wav" 2.4 8   13
-i 3 150  10 "oud1.wav" 2.5 16  42
-i 3 160  10 "amen-m.wav" 2.3 8   2 
-i 3 160  10 "oud2.wav" 2.4 8   3
-i 3 160  10 "oud1.wav" 2.5 16  32
-i 3 170  10 "amen-m.wav" 2.3 8   2 
-i 3 170  10 "oud2.wav" 2.4 8   3
-i 3 170  10 "oud1.wav" 2.5 16  2
+i 3 10 10 "assets/amen-m.wav" 2.3 8   2
+i 3 10 10 "assets/oud2.wav" 2.4 8   3
+i 3 10 10 "assets/oud1.wav" 2.5 16  2
+i 3 20  10 "assets/amen-m.wav" 2.3 8   12
+i 3 20 10 "assets/oud2.wav" 2.4 8   3
+i 3 20 10 "assets/oud1.wav" 2.5 16  2
+i 3 30  10 "assets/amen-m.wav" 2.3 8   12
+i 3 30  10 "assets/oud2.wav" 2.4 8   13
+i 3 30  10 "assets/oud1.wav" 2.5 16  2
+i 3 40  10 "assets/amen-m.wav" 2.3 8   2
+i 3 40  10 "assets/oud2.wav" 2.4 8   3
+i 3 40  10 "assets/oud1.wav" 2.5 16  12
+i 3 50  10 "assets/amen-m.wav" 2.3 8   2
+i 3 50 10 "assets/oud2.wav" 2.4 8   3
+i 3 50  10 "assets/oud1.wav" 2.5 16  22
+i 3 60  10 "assets/amen-m.wav" 2.3 8   2
+i 3 60  10 "assets/oud2.wav" 2.4 8   33
+i 3 60  10 "assets/oud1.wav" 2.5 16  2
+i 3 70  10 "assets/amen-m.wav" 2.3 8   12
+i 3 70  10 "assets/oud2.wav" 2.4 8   3
+i 3 70  10 "assets/oud1.wav" 2.5 16  2
+i 3 100  10 "assets/amen-m.wav" 2.3 8   2
+i 3 100  10 "assets/oud2.wav" 2.4 8   3
+i 3 100  10 "assets/oud1.wav" 2.5 16  12
+i 3 110  10 "assets/amen-m.wav" 2.3 8   2
+i 3 110  10 "assets/oud2.wav" 2.4 8   23
+i 3 110  10 "assets/oud1.wav" 2.5 16  2
+i 3 120  10 "assets/amen-m.wav" 2.3 8   2
+i 3 120  10 "assets/oud2.wav" 2.4 8   3
+i 3 120  10 "assets/oud1.wav" 2.5 16  2
+i 3 130  10 "assets/amen-m.wav" 2.3 8   2
+i 3 130  10 "assets/oud2.wav" 2.4 8   23
+i 3 130  10 "assets/oud1.wav" 2.5 16  12
+i 3 140  10 "assets/amen-m.wav" 2.3 8   12
+i 3 140  10 "assets/oud2.wav" 2.4 8   3
+i 3 140  10 "assets/oud1.wav" 2.5 16  22
+i 3 150  10 "assets/amen-m.wav" 2.3 8   2
+i 3 150  10 "assets/oud2.wav" 2.4 8   13
+i 3 150  10 "assets/oud1.wav" 2.5 16  42
+i 3 160  10 "assets/amen-m.wav" 2.3 8   2
+i 3 160  10 "assets/oud2.wav" 2.4 8   3
+i 3 160  10 "assets/oud1.wav" 2.5 16  32
+i 3 170  10 "assets/amen-m.wav" 2.3 8   2
+i 3 170  10 "assets/oud2.wav" 2.4 8   3
+i 3 170  10 "assets/oud1.wav" 2.5 16  2
 e
 </CsScore>
-</CsoundSynthesizer><bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>880</x>
- <y>71</y>
- <width>396</width>
- <height>643</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="nobackground">
-  <r>231</r>
-  <g>46</g>
-  <b>255</b>
- </bgcolor>
- <bsbObject version="2" type="BSBVSlider">
-  <objectName>slider1</objectName>
-  <x>5</x>
-  <y>5</y>
-  <width>20</width>
-  <height>100</height>
-  <uuid>{6c04530b-d163-43f4-85a5-5e85bf1b8635}</uuid>
-  <visible>true</visible>
-  <midichan>0</midichan>
-  <midicc>-3</midicc>
-  <minimum>0.00000000</minimum>
-  <maximum>1.00000000</maximum>
-  <value>0.00000000</value>
-  <mode>lin</mode>
-  <mouseControl act="jump">continuous</mouseControl>
-  <resolution>-1.00000000</resolution>
-  <randomizable group="0">false</randomizable>
- </bsbObject>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>
-<MacOptions>
-Version: 3
-Render: Real
-Ask: Yes
-Functions: ioObject
-Listing: Window
-WindowBounds: 880 71 396 643
-CurrentView: io
-IOViewEdit: On
-Options:
-</MacOptions>
-
-<MacGUI>
-ioView nobackground {59367, 11822, 65535}
-ioSlider {5, 5} {20, 100} 0.000000 1.000000 0.000000 slider1
-</MacGUI>
+</CsoundSynthesizer>
