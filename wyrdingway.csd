@@ -139,3 +139,20 @@ i 3 170  10 "assets/oud1.wav" 2.5 16  2
 e
 </CsScore>
 </CsoundSynthesizer>
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>0</x>
+ <y>0</y>
+ <width>0</width>
+ <height>0</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>

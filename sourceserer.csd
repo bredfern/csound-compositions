@@ -42,7 +42,7 @@ aRvbL,aRvbR reverbsc gaSend,gaSend,0.9,7000
 instr 3
 
 iolaps  = 2
-igrsize = 0.04
+igrsize = 0.0004
 ifreq   = iolaps/igrsize
 ips     = 1/iolaps
 
@@ -84,3 +84,20 @@ i 3 + 30 0.23 0.23
 e
 </CsScore>
 </CsoundSynthesizer>
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>0</x>
+ <y>0</y>
+ <width>0</width>
+ <height>0</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>
