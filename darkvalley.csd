@@ -10,10 +10,10 @@ nchnls = 2
 
 giSine    ftgen     0, 0, 2^10, 10, 1
 
-instr 1 ;inharmonic additive synthesis
+instr 1 
 ibasefrq  =         cpspch(p4)
 ibaseamp  =         ampdbfs(p5)
-;create 8 inharmonic partials
+
 aOsc1     poscil    ibaseamp, ibasefrq, giSine
 aOsc2     poscil    ibaseamp/2, ibasefrq*1.02, giSine
 aOsc3     poscil    ibaseamp/3, ibasefrq*1.1, giSine
@@ -25,10 +25,10 @@ aOsc8     poscil    ibaseamp/8, ibasefrq*1.41, giSine
 kenv      linen     1, p3/4, p3, p3/4
 aOut = aOsc1 + aOsc2 + aOsc3 + aOsc4 + aOsc5 + aOsc6 + aOsc7 + aOsc8
           outs aOut*kenv, aOut*kenv
-    endin
+endin
     
-    instr 2
-     ; Amplitude-Modulation
+instr 2
+
 aOffset linseg 0, 1, 0, 5, 1, 3, 0
 aSine1 poscil 0.2, rnd(230), 2 ; -> [230, 460, 690] Hz
 aSine2 poscil 0.2, rnd(800), 1
@@ -55,17 +55,17 @@ kamp     =        0.3
 kfreq    =        p4
 ipres1   =        p5
 ipres2   =        p6
-; kpres (bow pressure) defined using a random spline
+
 kpres    rspline  p5,p6,0.5,2
 krat     =        0.127236
 kvibf    =        4.5
 kvibamp  =        0
 iminfreq =        20
-; call the wgbow opcode
+
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,giSine,iminfreq
-; modulating delay time
+
 kdel     rspline  0.01,0.1,0.1,0.5
-; bow pressure parameter delayed by a varying time in the right channel
+
 kpres    vdel_k   kpres,kdel,0.2,2
 aSigR    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,giSine,iminfreq
          outs     aSigL,aSigR
@@ -137,12 +137,12 @@ i 3 400 10 -21 3 5 17
 i 3 460 10 -22 4 5 18
 
 i 4  10 480  70 0.03 0.1
-i 4  10 480  85 0.03 0.1
-i 4  10 480 100 0.03 0.09
-i 4  10 480 135 0.03 0.09
-i 4  10 480 170 0.02 0.09
-i 4  10 480 202 0.04 0.1
-i 4  10 480 233 0.05 0.11
+i 4  10 483  85 0.03 0.1
+i 4  10 481 100 0.03 0.09
+i 4  10 484 135 0.03 0.09
+i 4  10 481 170 0.02 0.09
+i 4  10 482 202 0.04 0.1
+i 4  10 483 233 0.05 0.11
 
 </CsScore>
 </CsoundSynthesizer>
