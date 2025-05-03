@@ -25,7 +25,7 @@ ipres1   =        p5
 ipres2   =        p6
 
 kpres    rspline  p5,p6,0.5,0.6
-krat     =        rnd(100)
+krat     =        rnd(900)
 kvibf    =        14.5
 kvibamp  =        0.2
 iminfreq =        20
@@ -45,8 +45,8 @@ endin
 
 instr thunder
 
-kamp = 0.025
-kfreq = rnd(200)
+kamp = p4
+kfreq = rnd(500)
 kc1 = 127
 kc2 = 30
 kvdepth = 0.005
@@ -61,9 +61,8 @@ gaRvbSend    =         gaRvbSend + (asig * iRvbSendAmt)
 
 endin
 
-
 instr reverb1 ; reverb - always on
-kroomsize    init      0.9          ; room size (range 0 to 1)
+kroomsize    init      rnd(0.9)          ; room size (range 0 to 1)
 kHFDamp      init      0.4           ; high freq. damping (range 0 to 1)
 ; create reverberated version of input signal (note stereo input and output)
 aCarrier,aCarrier  freeverb  gaRvbSend, gaRvbSend,kroomsize,kHFDamp
@@ -89,26 +88,22 @@ i "ocean"  0 180 170 0.02 0.09
 i "ocean"  0 180 202 0.04 0.13
 i "ocean"  0 180 233 0.05 0.11
 
-i "thunder" 10 
-i "thunder" + 10 
-i "thunder" + 10 
-i "thunder" + 10 
-
-i "thunder" + 10
-i "thunder" + 10
-i "thunder" + 10
-
-i "thunder" + 10 
-i "thunder" + 10
-i "thunder" + 10
-
-i "thunder" + 10 
-i "thunder" + 10 
-i "thunder" + 10 
-
-i "thunder" + 10 
-i "thunder" + 10
-i "thunder" + 10
+i "thunder" 30 3 0.010 
+i "thunder" + 10 0.010
+i "thunder" + 10 0.010
+i "thunder" + 10 0.010
+i "thunder" + 10 0.002
+i "thunder" + 2 0.003
+i "thunder" + 10 0.002
+i "thunder" + 2 0.003
+i "thunder" + 10 0.009
+i "thunder" + 10 0.009
+i "thunder" + 10 0.015
+i "thunder" + 3 0.015
+i "thunder" + 10 0.015
+i "thunder" + 10 0.011
+i "thunder" + 10 0.011
+i "thunder" + 10 0.011
 
 i "reverb1" 0 180
 i "reverb2" 0 180
