@@ -9,7 +9,8 @@ sr = 44100
 ksmps = 32
 nchnls = 2
 0dbfs = 1
-seed    1
+
+seed 1
 
 gisine  ftgen   0,0,4096,10,1
 gaSendL,gaSendR init 0
@@ -17,13 +18,13 @@ gaRvbSend    init      0 ; global audio variable initialized to zero
 
 instr ocean ; wgbow instrument turned into water sound
 kamp     =        0.32
-kfreq    =        p4 * rnd(100)
+kfreq    =        p4 * rnd(1000)
 ipres1   =        p5
 ipres2   =        p6
 
 kpres    rspline  ipres1,ipres2,0.5,0.6
-krat     =        10
-kvibf    =        rnd(100)
+krat     =        rnd(100) * 10
+kvibf    =        rnd(1000)
 kvibamp  =        0.5
 iminfreq =        100
 ; call the wgbow opcode
@@ -42,18 +43,18 @@ endin
 
 instr thunder
 
-kamp = 0.4
+kamp = 0.34
 kfreq = p4 * rnd(300) + 100
 kc1 = 12
 kc2 = 3
 kvdepth = rnd(0.009)
-kvrate = rnd(100)
+kvrate = rnd(1000)
 
 asig fmbell kamp, kfreq, kc1, kc2, kvdepth, kvrate
 
 outs asig, asig
 
-iRvbSendAmt = 1 
+iRvbSendAmt = 2
 gaRvbSend = gaRvbSend + (asig * iRvbSendAmt)
 
 endin
@@ -68,7 +69,7 @@ aCarrier,aCarrier  freeverb  gaRvbSend, gaRvbSend,kroomsize,kHFDamp
   endin
   
   instr reverb2 ; reverb
-aRvbL,aRvbR reverbsc gaSendL,gaSendR,0.9,10000
+aRvbL,aRvbR reverbsc gaSendL,gaSendR,0.9,100000
             outs     aRvbL,aRvbR
             clear    gaSendL,gaSendR
  endin
@@ -77,15 +78,15 @@ aRvbL,aRvbR reverbsc gaSendL,gaSendR,0.9,10000
 <CsScore>
 f 1 0 32768 10 1
 
-t 60
+t 0 40
 
-i "ocean"  0 180 280 0.03 0.2
-i "ocean"  0 180 205 0.03 0.3
-i "ocean"  0 180 200 0.03 0.09
-i "ocean"  0 180 235 0.03 0.09
-i "ocean"  0 180 270 0.02 0.09
-i "ocean"  0 180 202 0.04 0.13
-i "ocean"  0 180 233 0.05 0.11
+i "ocean"  0 280 280 0.03 0.2
+i "ocean"  0 .   205 0.03 0.3
+i "ocean"  0 .   200 0.03 0.09
+i "ocean"  0 .   235 0.03 0.09
+i "ocean"  0 .   270 0.02 0.09
+i "ocean"  0 .   202 0.04 0.13
+i "ocean"  0 .   233 0.05 0.11
 
 i "thunder" 3 3 0.010 
 i "thunder" + 10 0.010
@@ -109,9 +110,17 @@ i "thunder" + 10 0.015
 i "thunder" + 10 0.011
 i "thunder" + 10 0.011
 i "thunder" + 10 0.011
+i "thunder" + 10 0.011
+i "thunder" + 10 0.015
+i "thunder" + 3 0.015
+i "thunder" + 10 0.015
+i "thunder" + 10 0.011
+i "thunder" + 10 0.011
+i "thunder" + 10 0.011
 
-i "reverb1" 0 180
-i "reverb2" 0 180
+i "reverb1" 0 280
+
+i "reverb2" 0 280
 e
 </CsScore>
 </CsoundSynthesizer>

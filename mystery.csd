@@ -7,7 +7,7 @@
 sr = 44100
 ksmps = 16
 nchnls = 2
-0dbfs   =       1
+0dbfs = 1
 seed    0
 gisine  ftgen	0,0,4096,10,1
 gaSend init 0
@@ -46,7 +46,7 @@ outs a1 + aL, a1 + aR
 endin
 
 instr 3
-a1 sleighbells 0.1, 0.01
+a1 sleighbells 0.3, 0.1
 outs a1, a1
 endin
 
@@ -89,7 +89,7 @@ aRvbL,aRvbR reverbsc gaSend,gaSend,0.9,7000
 f 1 0 32768 10 1
 ; Table
 r 19
-t 0 60
+t 0 20
 
 i 1 0 2 140
 i 1 2 1 120
