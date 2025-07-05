@@ -1,6 +1,6 @@
 <CsoundSynthesizer>
 <CsOptions>
-;-b 32768 -B 65536 -o dac
+;-o dac
 -W -o storm.wav
 </CsOptions>
 <CsInstruments>
@@ -9,26 +9,23 @@ sr = 44100
 ksmps = 32
 nchnls = 2
 0dbfs = 1
-seed    0
+seed    1
 
 gisine  ftgen   0,0,4096,10,1
-
 gaSendL,gaSendR init 0
-
 gaRvbSend    init      0 ; global audio variable initialized to zero
 
-
 instr ocean ; wgbow instrument turned into water sound
-kamp     =        0.25
-kfreq    =        p4
+kamp     =        0.32
+kfreq    =        p4 * rnd(100)
 ipres1   =        p5
 ipres2   =        p6
 
-kpres    rspline  p5,p6,0.5,0.6
-krat     =        rnd(900)
-kvibf    =        14.5
-kvibamp  =        0.2
-iminfreq =        20
+kpres    rspline  ipres1,ipres2,0.5,0.6
+krat     =        10
+kvibf    =        rnd(100)
+kvibamp  =        0.5
+iminfreq =        100
 ; call the wgbow opcode
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
 ; modulating delay time
@@ -38,32 +35,32 @@ kpres    vdel_k   kpres,kdel,0.2,2
 aSigR    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
          outs     aSigL,aSigR
 ; send some audio to the reverb
-gaSendL  =        gaSendL + aSigL/3
-gaSendR  =        gaSendR + aSigR/3
+gaSendL  =        gaSendL + aSigL/2
+gaSendR  =        gaSendR + aSigR/2
 
 endin
 
 instr thunder
 
-kamp = p4
-kfreq = rnd(500)
-kc1 = 127
-kc2 = 30
-kvdepth = 0.005
-kvrate = rnd(400)
+kamp = 0.4
+kfreq = p4 * rnd(300) + 100
+kc1 = 12
+kc2 = 3
+kvdepth = rnd(0.009)
+kvrate = rnd(100)
 
 asig fmbell kamp, kfreq, kc1, kc2, kvdepth, kvrate
 
 outs asig, asig
 
-iRvbSendAmt  =         1 
-gaRvbSend    =         gaRvbSend + (asig * iRvbSendAmt)
+iRvbSendAmt = 1 
+gaRvbSend = gaRvbSend + (asig * iRvbSendAmt)
 
 endin
 
 instr reverb1 ; reverb - always on
-kroomsize    init      rnd(0.9)          ; room size (range 0 to 1)
-kHFDamp      init      0.4           ; high freq. damping (range 0 to 1)
+kroomsize    init      1        ; room size (range 0 to 1)
+kHFDamp      init      0.1           ; high freq. damping (range 0 to 1)
 ; create reverberated version of input signal (note stereo input and output)
 aCarrier,aCarrier  freeverb  gaRvbSend, gaRvbSend,kroomsize,kHFDamp
              outs      aCarrier,aCarrier ; send audio to outputs
@@ -80,15 +77,17 @@ aRvbL,aRvbR reverbsc gaSendL,gaSendR,0.9,10000
 <CsScore>
 f 1 0 32768 10 1
 
-i "ocean"  0 180 180 0.03 0.2
-i "ocean"  0 180 105 0.03 0.3
-i "ocean"  0 180 100 0.03 0.09
-i "ocean"  0 180 135 0.03 0.09
-i "ocean"  0 180 170 0.02 0.09
+t 60
+
+i "ocean"  0 180 280 0.03 0.2
+i "ocean"  0 180 205 0.03 0.3
+i "ocean"  0 180 200 0.03 0.09
+i "ocean"  0 180 235 0.03 0.09
+i "ocean"  0 180 270 0.02 0.09
 i "ocean"  0 180 202 0.04 0.13
 i "ocean"  0 180 233 0.05 0.11
 
-i "thunder" 30 3 0.010 
+i "thunder" 3 3 0.010 
 i "thunder" + 10 0.010
 i "thunder" + 10 0.010
 i "thunder" + 10 0.010
@@ -104,10 +103,15 @@ i "thunder" + 10 0.015
 i "thunder" + 10 0.011
 i "thunder" + 10 0.011
 i "thunder" + 10 0.011
+i "thunder" + 10 0.015
+i "thunder" + 3 0.015
+i "thunder" + 10 0.015
+i "thunder" + 10 0.011
+i "thunder" + 10 0.011
+i "thunder" + 10 0.011
 
 i "reverb1" 0 180
 i "reverb2" 0 180
 e
 </CsScore>
 </CsoundSynthesizer>
-
