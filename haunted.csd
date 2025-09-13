@@ -6,7 +6,7 @@
 sr = 44100
 ksmps = 16 
 nchnls = 2
-0dbfs = 1
+0dbfs = -0.001
 
 giSine    ftgen     0, 0, 2^10, 10, 1
 

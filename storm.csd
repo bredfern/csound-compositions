@@ -1,7 +1,7 @@
-<CsoundSynthesizer>
+]<CsoundSynthesizer>
 <CsOptions>
-;-o dac
--W -o storm.wav
+-o dac
+;-W -o storm.wav
 </CsOptions>
 <CsInstruments>
 
@@ -17,15 +17,15 @@ gaSendL,gaSendR init 0
 gaRvbSend    init      0 ; global audio variable initialized to zero
 
 instr ocean ; wgbow instrument turned into water sound
-kamp     =        0.32
-kfreq    =        p4 * rnd(1000)
+kamp     =        1
+kfreq    =        p4 + rnd(200)
 ipres1   =        p5
 ipres2   =        p6
 
 kpres    rspline  ipres1,ipres2,0.5,0.6
 krat     =        rnd(100) * 10
 kvibf    =        rnd(1000)
-kvibamp  =        0.5
+kvibamp  =        rnd(9)
 iminfreq =        100
 ; call the wgbow opcode
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
@@ -43,11 +43,11 @@ endin
 
 instr thunder
 
-kamp = 0.34
-kfreq = p4 * rnd(300) + 100
+kamp = 0.05
+kfreq = p4
 kc1 = 12
 kc2 = 3
-kvdepth = rnd(0.009)
+kvdepth = rnd(100)
 kvrate = rnd(1000)
 
 asig fmbell kamp, kfreq, kc1, kc2, kvdepth, kvrate
@@ -61,7 +61,7 @@ endin
 
 instr reverb1 ; reverb - always on
 kroomsize    init      1        ; room size (range 0 to 1)
-kHFDamp      init      0.1           ; high freq. damping (range 0 to 1)
+kHFDamp      init      0.01           ; high freq. damping (range 0 to 1)
 ; create reverberated version of input signal (note stereo input and output)
 aCarrier,aCarrier  freeverb  gaRvbSend, gaRvbSend,kroomsize,kHFDamp
              outs      aCarrier,aCarrier ; send audio to outputs
@@ -69,7 +69,7 @@ aCarrier,aCarrier  freeverb  gaRvbSend, gaRvbSend,kroomsize,kHFDamp
   endin
   
   instr reverb2 ; reverb
-aRvbL,aRvbR reverbsc gaSendL,gaSendR,0.9,100000
+aRvbL,aRvbR reverbsc gaSendL,gaSendR,0.9,1000
             outs     aRvbL,aRvbR
             clear    gaSendL,gaSendR
  endin
@@ -121,6 +121,6 @@ i "thunder" + 10 0.011
 i "reverb1" 0 280
 
 i "reverb2" 0 280
-e
+
 </CsScore>
 </CsoundSynthesizer>
