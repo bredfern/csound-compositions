@@ -24,8 +24,8 @@ ipres2   =        p6
 
 kpres    rspline  ipres1,ipres2,0.5,0.6
 krat     =        100
-kvibf    =        1
-kvibamp  =        0.25 
+kvibf    =        10
+kvibamp  =        0.5 
 iminfreq =        1
 ; call the wgbow opcode
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
