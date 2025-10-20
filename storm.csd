@@ -18,15 +18,15 @@ gaRvbSend    init      0 ; global audio variable initialized to zero
 
 instr ocean ; wgbow instrument turned into water sound
 kamp     =        1
-kfreq    =        p4 + rnd(200)
+kfreq    =        p4
 ipres1   =        p5
 ipres2   =        p6
 
 kpres    rspline  ipres1,ipres2,0.5,0.6
-krat     =        rnd(100) * 10
-kvibf    =        rnd(1000)
-kvibamp  =        rnd(9)
-iminfreq =        100
+krat     =        100
+kvibf    =        1
+kvibamp  =        0.25 
+iminfreq =        1
 ; call the wgbow opcode
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
 ; modulating delay time
@@ -43,12 +43,12 @@ endin
 
 instr thunder
 
-kamp = 0.05
+kamp = 0.15
 kfreq = p4
 kc1 = 12
 kc2 = 3
-kvdepth = rnd(100)
-kvrate = rnd(1000)
+kvdepth = 100
+kvrate = 100
 
 asig fmbell kamp, kfreq, kc1, kc2, kvdepth, kvrate
 
