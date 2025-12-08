@@ -23,8 +23,8 @@ ipres1   =        p5
 ipres2   =        p6
 
 kpres    rspline  ipres1,ipres2,0.5,0.6
-krat     =        100
-kvibf    =        10
+krat     =        100 
+kvibf    =        0.5 
 kvibamp  =        0.5 
 iminfreq =        1
 ; call the wgbow opcode
