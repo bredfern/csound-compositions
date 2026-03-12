@@ -9,7 +9,7 @@ ksmps = 32
 nchnls = 2
 0dbfs = 0.5
 
-gaRvbSend    init      0 
+gaRvbSend init 0 
 
 instr Ghosts
 
