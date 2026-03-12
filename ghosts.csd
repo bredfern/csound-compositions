@@ -15,7 +15,7 @@ gaRvbSend init 0
 
 instr Ghosts
 
- kC randomi 3000, 5000, 1, 2, 4
+ kC randomi rnd(3000), rnd(5000), 1, 2, 4
  kR randomi 1, 2, 2, 3
  kI randomi 1, 5, randomi:k(3,1,1,3), 3
 
@@ -71,14 +71,18 @@ endin
 <CsScore>
 //changing the ratio at constant index=3
 //let some nonsense happen
-i "DemonStrings"  0 480  70 0.03 0.1
+i "DemonStrings"  0 480  70 0.01 0.1
 i "DemonStrings"  0 480  85 0.03 0.1
 i "DemonStrings"  0 480 100 0.03 0.09
 i "DemonStrings"  0 480 135 0.03 0.09
 i "DemonStrings"  0 480 170 0.02 0.09
 i "DemonStrings"  0 480 202 0.04 0.1
 i "DemonStrings"  0 480 233 0.05 0.11
-i "Ghosts" 0 480
+i "Ghosts" 10 100
+i "Ghosts" 110 100
+i "Ghosts" 210 100
+i "Ghosts" 310 100
+i "Ghosts" 410 70
 i "ReverbEffect" 0 480
 </CsScore>
 </CsoundSynthesizer>
