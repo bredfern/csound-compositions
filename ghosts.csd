@@ -80,7 +80,6 @@ i "DemonStrings"  0 480 202 0.04 0.1
 i "DemonStrings"  0 480 233 0.05 0.11
 i "Ghosts" 0 480
 i "ReverbEffect" 0 480
-i "EvilReverb" 0 480
 </CsScore>
 </CsoundSynthesizer>
 ;based on an example by joachim heintz
