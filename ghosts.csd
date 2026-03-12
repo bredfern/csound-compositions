@@ -25,7 +25,7 @@ instr Ghosts
 
  //apply to standard model
  aModulator poscil kD, kM
- aCarrier poscil ampdb(port:k(kI*5-48,.1)), kC + aModulator
+ aCarrier poscil ampdb(port:k(kI*5-42,.1)), kC + aModulator
  aOut linen aCarrier, .1, p3, p3/10
  out aOut, aOut
  iRvbSendAmt  =         0.8               ; reverb send amount (0 - 1)
