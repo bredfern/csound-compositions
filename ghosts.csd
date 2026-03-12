@@ -25,7 +25,7 @@ instr Ghosts
 
  //apply to standard model
  aModulator poscil kD, kM
- aCarrier poscil ampdb(port:k(kI*5-32,.1)), kC + aModulator
+ aCarrier poscil ampdb(port:k(kI*5-48,.1)), kC + aModulator
  aOut linen aCarrier, .1, p3, p3/10
  out aOut, aOut
  iRvbSendAmt  =         0.8               ; reverb send amount (0 - 1)
@@ -35,7 +35,7 @@ gaRvbSend    =         gaRvbSend + (aOut * iRvbSendAmt)
 endin
 
 instr DemonStrings ; wgbow instrument
-kamp     =        0.3
+kamp     =        0.2
 kfreq    =        p4
 ipres1   =        p5
 ipres2   =        p6
