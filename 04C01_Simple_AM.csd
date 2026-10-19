@@ -23,6 +23,8 @@ i 1 0 25
 </CsScore>
 </CsoundSynthesizer>
 ; example by Alex Hofmann and joachim heintz
+
+
 <bsbPanel>
  <label>Widgets</label>
  <objectName/>

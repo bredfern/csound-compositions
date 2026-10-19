@@ -1,6 +1,7 @@
 <CsoundSynthesizer>
 <CsOptions>
 -odac -d
+;-W -o halloween.wav
 </CsOptions>
 <CsInstruments>
 
@@ -10,37 +11,19 @@ nchnls = 2
 0dbfs = 1.0
 
 ; Seed random generator
-seed 0
+seed 30
 
 ;;====================================================================
 ;; INSTRUMENT 1: Bubbling Cauldron (Filtered Noise & Pitched Drops)
 ;;====================================================================
-instr 1
-    ; Low rumbling fire/brew base
-    aNoise noise 0.15, 0
-    aRumble reson aNoise, 120, 40, 1
-    
-    ; Bubble trigger rate using low-frequency random pulses
-    kTrig metro 12 + randi:k(8, 2)
-    
-    ; Randomize bubble frequency and envelope
-    kFreq = 300 + birnd(200)
-    aEnv decay2 kTrig, 0.005, 0.04
-    aBubble sine aEnv * 0.4, kFreq + (aEnv * 300)
-    
-    ; Bandpass filtering to sound liquid
-    aLiquid butterbp aBubble + aRumble, 800, 400
-    
-    aOut = (aRumble * 0.6) + (aLiquid * 1.5)
-    outs aOut, aOut
-endin
+
 
 ;;====================================================================
 ;; INSTRUMENT 2: Cackling Witch (FM Vocal Tract Formant Sweep)
 ;;====================================================================
-instr 2
+instr 1
     ; Formant pitch contour (rapid pitch jumps mimicking a laugh)
-    kLfo LFO 6, 8, 0
+    kLfo lfo 6, 8, 0
     kPitch = p4 + (kLfo * 120) + randi:k(30, 10)
     
     ; FM Synthesis for raspiness
@@ -64,7 +47,7 @@ endin
 ;;====================================================================
 ;; INSTRUMENT 3: Howling Ghosts (Glissando Sine with Chorus/Reverb)
 ;;====================================================================
-instr 3
+instr 2
     ; Pitch glissando sweeping up and down
     kPitch line p4, p3, p5
     kWobble poscil 15, 3
@@ -87,7 +70,7 @@ endin
 ;;====================================================================
 ;; INSTRUMENT 4: Moaning Monsters & Shaking Chains
 ;;====================================================================
-instr 4
+instr 3
     ; --- MONSTER MOAN ---
     kLowPitch line p4, p3, p4 * 0.7
     aSaw vco2 0.25, kLowPitch, 0 ; Sawtooth for growl
@@ -97,7 +80,7 @@ instr 4
     ; High metallic frequencies using ring modulation & noise bursts
     aChainNoise noise 0.3, 0
     kChainTrig metro 8 + randi:k(4, 3)
-    aChainEnv decay2 kChainTrig, 0.001, 0.05
+    aChainEnv trigexpseg kChainTrig, 0.001, 0.05
     
     ; Inharmonic metal resonances
     aMetal1 reson aChainNoise * aChainEnv, 2400, 100, 1
@@ -119,24 +102,49 @@ f 1 0 16384 10 1
 ; --- SCORE EVENTS ---
 
 ; i1: Cauldron bubbles continuously in the background
-i 1 0 25
+;i 1 0 25
 
 ; i2: Witch Cackles (p4=base freq, p5=start pan, p6=end pan)
-i 2 1.5  2.5 450 0.2 0.8
-i 2 5.0  3.0 520 0.8 0.1
-i 2 10.0 2.0 400 0.3 0.7
-i 2 16.0 4.0 600 0.5 0.5
+i 1 1.5  2.5 450 0.2 0.8
+i 1 5.0  3.0 520 0.8 0.1
+i 1 10.0 2.0 400 0.3 0.7
+i 1 16.0 4.0 600 0.5 0.5
 
 ; i3: Howling Ghosts (p4=start freq, p5=end freq, p6=pan)
-i 3 0.0  8.0 300 600 0.2
-i 3 4.0 10.0 700 250 0.8
-i 3 12.0 9.0 200 850 0.5
+i 2 0.0  8.0 300 600 0.2
+i 2 4.0 10.0 700 250 0.8
+i 2 12.0 9.0 200 850 0.5
 
 ; i4: Moaning Monsters & Chains (p4=monster base freq)
-i 4 2.0  6.0 65
-i 4 9.0  7.0 55
-i 4 15.0 8.0 48
+i 3 2.0  6.0 65
+i 3 9.0  7.0 55
+i 3 15.0 8.0 48
 
 e
 </CsScore>
 </CsSynthesizer>
+
+
+
+
+
+
+
+
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>

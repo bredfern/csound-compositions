@@ -24,6 +24,10 @@ i 1 0 [1/2205]
 
 
 
+
+
+
+
 <bsbPanel>
  <label>Widgets</label>
  <objectName/>

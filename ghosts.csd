@@ -89,6 +89,8 @@ i "ReverbEffect" 0 480
 ;based on an example by joachim heintz
 
 
+
+
 <bsbPanel>
  <label>Widgets</label>
  <objectName/>

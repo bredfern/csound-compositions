@@ -156,4 +156,22 @@ i 1   27.0   3.0   0.7   220.00 4     1.0 2.0 3.0 4.0   1.0 0.8   0.6   0.4  0.5
 
 e
 </CsScore>
+
 </CsoundSynthesizer>
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>

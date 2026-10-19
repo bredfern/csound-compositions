@@ -6,7 +6,7 @@
 <CsInstruments>
 
 sr = 44100
-ksmps = 32
+ksmps = 44
 nchnls = 2
 0dbfs = 1
 
@@ -17,7 +17,7 @@ gaSendL,gaSendR init 0
 gaRvbSend    init      0 ; global audio variable initialized to zero
 
 instr ocean ; wgbow instrument turned into water sound
-kamp     =        1
+kamp     =        0.25
 kfreq    =        p4
 ipres1   =        p5
 ipres2   =        p6
@@ -26,7 +26,7 @@ kpres    rspline  ipres1,ipres2,0.5,0.6
 krat     =        100 
 kvibf    =        0.5 
 kvibamp  =        0.5 
-iminfreq =        1
+iminfreq =        300
 ; call the wgbow opcode
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
 ; modulating delay time
@@ -43,8 +43,8 @@ endin
 
 instr thunder
 
-kamp = 0.15
-kfreq = p4
+kamp = 0.1
+kfreq = p4 
 kc1 = 12
 kc2 = 3
 kvdepth = 100
@@ -80,13 +80,13 @@ f 1 0 32768 10 1
 
 t 0 40
 
-i "ocean"  0 280 280 0.03 0.2
-i "ocean"  0 .   205 0.03 0.3
-i "ocean"  0 .   200 0.03 0.09
-i "ocean"  0 .   235 0.03 0.09
-i "ocean"  0 .   270 0.02 0.09
-i "ocean"  0 .   202 0.04 0.13
-i "ocean"  0 .   233 0.05 0.11
+i "ocean"  0 280 580 0.03 0.2
+i "ocean"  0 .   405 0.03 0.3
+i "ocean"  0 .   600 0.03 0.09
+i "ocean"  0 .   635 0.03 0.09
+i "ocean"  0 .   670 0.02 0.09
+i "ocean"  0 .   602 0.04 0.13
+i "ocean"  0 .   633 0.05 0.11
 
 i "thunder" 3 3 0.010 
 i "thunder" + 10 0.010
@@ -124,3 +124,22 @@ i "reverb2" 0 280
 
 </CsScore>
 </CsoundSynthesizer>
+
+
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>

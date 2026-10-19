@@ -112,7 +112,7 @@ endin
 </CsInstruments>
 <CsScore>
 t 0 80 ; Tempo set to 130 BPM
-
+r 200
 ; ===================================================================
 ; DRUM PATTERN (4 Bars Loop)
 ; p4 values: 1=Kick, 2=Snare, 3=Hi-Hat
@@ -195,9 +195,30 @@ i 3 0.0 3.8 67
 i 3 4.0 3.8 58
 i 3 4.0 3.8 62
 i 3 4.0 3.8 65
-
+s
 e
 
 </CsScore>
 </CsoundSynthesizer>
 
+
+
+
+
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>

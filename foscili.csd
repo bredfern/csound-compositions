@@ -9,7 +9,7 @@
 <CsInstruments>
 
 sr = 44100
-ksmps = 32
+ksmps = 44
 nchnls = 2
 0dbfs  = 1
 
@@ -29,10 +29,27 @@ endin
 ; sine
 f 1 0 16384 10 1
 
-i 1 0  9 .01	;vibrato
+i 1 0  9 .001	;vibrato
 i 1 10 .  1
-i 1 20 . 1.414	;gong-ish
-i 1 30 5 2.05	;with "beat"
+i 1 20 . 10.414	;gong-ish
+i 1 30 5 1.05	;with "beat"
 e
 </CsScore>
 </CsoundSynthesizer>
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>
