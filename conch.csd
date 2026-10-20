@@ -1,93 +1,80 @@
 <CsoundSynthesizer>
 <CsOptions>
--odac ; Output to audio soundcard
+; Send audio output to your default soundcard
+-odac 
 </CsOptions>
-<CsInstruments>
 
+<CsInstruments>
 sr = 44100
 ksmps = 32
 nchnls = 2
 0dbfs = 1.0
 
-; Global variable for the reverb send bus
-gaSend init 0
-
-instr 1 ; Conch Shell Synthesizer
-    iAmp = p4
-    iFreq = p5
+instr 1 ; Conch Trumpet / Horn Sound
+    iDur = p3          ; Duration (3.5 seconds)
+    iBaseNote = p4     ; MIDI Note (60)
+    iAmp = p5          ; Amplitude (0.8)
     
-    kEnv = madsr(0.02, 0.1, 0.8, 0.2)
+    ; --- Envelope ---
+    ; sustain: dur * 0.8 (2.8s), release: dur * 0.2 (0.7s)
+    iSustain = iDur * 0.8
+    iRelease = iDur * 0.2
+    aEnv linseg 0, 0.01, iAmp, iSustain - 0.01, iAmp, iRelease, 0
     
-    ; Pitch variation
-    kVib = poscil(0.015, 4.5) 
-    kPitch = iFreq * (1 + kVib)
-
-    ; 1. INCREASED FM INDEX: Drives the synthesis harder to create 
-    ; bright, brassy upper harmonics that mimic a stiff lip buzz.
-    kModIndex = 2.0 + (kEnv * 4.0)
-    aModulator = poscil(iFreq * kModIndex, kPitch)
-    aCarrier = poscil(iAmp, kPitch + aModulator)
+    ; --- Vibrato / Pitch Modulation ---
+    ; depth: 0.15, rate: 5 Hz
+    kVib poscil 0.15, 5
     
-    ; 2. REDUCED NOISE: Dropped the amplitude from 0.1 to 0.015.
-    ; Shifted the resonance up to 2500Hz to sound like lip sizzle rather than wind.
-    aNoise = noise(iAmp * 0.015, 0)
-    aBreath = reson(aNoise, 2500, 500)
+    ; Frequencies with vibrato offset applied
+    kFreq1 = cpsmidinn(iBaseNote - 0.03 + kVib)
+    kFreq2 = cpsmidinn(iBaseNote + 0.03 + kVib)
+    kFreq3 = cpsmidinn(iBaseNote + kVib)
     
-    aSignal = aCarrier + aBreath
+    ; --- Oscillators ---
+    ; Osc 1: Primary Sawtooth (vco2 mode 0)
+    a1 vco2 1.0, kFreq1, 0 
     
-    ; 3. OPENED FILTER: Raised the cutoff drastically to 6500Hz so the 
-    ; new upper frequencies can actually be heard.
-    aFiltered = moogladder(aSignal, 6500, 0.1)
+    ; Osc 2: Supersaw 
+    ; Approximated with two slightly detuned sawtooth oscillators
+    a2a vco2 0.5, cpsmidinn(iBaseNote + 0.03 + 0.06 + kVib), 0
+    a2b vco2 0.5, cpsmidinn(iBaseNote + 0.03 - 0.06 + kVib), 0
+    a2 = a2a + a2b
     
-    aOut = aFiltered * kEnv
+    ; Osc 3: Narrow Pulse (amp: 0.5, pulse width: 0.45, vco2 mode 2)
+    a3 vco2 0.5, kFreq3, 2, 0.45 
     
-    outs aOut * 0.7, aOut * 0.7
+    ; Mix the oscillators to prevent clipping
+    aMix = (a1 + a2 + a3) / 3.0
     
-    ; Send to global reverb (if you are still using instr 99)
-    gaSend = gaSend + (aOut * 0.5)
+    ; --- Low-Pass Filter Automation ---
+    ; Sonic Pi cutoffs (20-88) are MIDI notes (approx 31Hz - 1.3kHz).
+    ; We automate a sweep mimicking the 'cutoff_slide' through the horn.
+    kCutoff expseg 1000, iDur, 400
+    aFilt moogladder aMix, kCutoff, 0.2
+    
+    ; Apply amplitude envelope
+    aOut = aFilt * aEnv
+    
+    ; --- Reverb ---
+    ; room: 0.6, mix: 0.35 (Freeverb takes a dry/wet ratio)
+    aRevL, aRevR freeverb aOut, aOut, 0.6, 0.5
+    
+    aMixL = (aOut * 0.65) + (aRevL * 0.35)
+    aMixR = (aOut * 0.65) + (aRevR * 0.35)
+    
+    ; Stereo output
+    outs aMixL, aMixR
 endin
-
-instr 99 ; Global Reverb (Dock Environment)
-    ; reverbsc arguments: inputL, inputR, feedback_level, cutoff_frequency
-    aRevL, aRevR reverbsc gaSend, gaSend, 0.78, 8000
-    
-    ; Output the wet reverberated signal
-    outs aRevL, aRevR
-    
-    ; Clear the global bus for the next control cycle
-    clear gaSend
-endin
-
 </CsInstruments>
+
 <CsScore>
-; Start the reverb instrument first and leave it running to catch the echo tails
-i 99 0 10.0
+; p1=instr, p2=start, p3=duration, p4=MIDI note, p5=Amplitude
+; Plays the note twice (mimicking a live_loop cycle with sleep dur + 0.5)
 
-; Conch notes
-i 1 0.0 2.0 0.25 292.00  ; G4
-i 1 2.5 1.5 0.15 223.25  ; C5
-i 1 4.5 3.0 0.15 202.00  ; G4
+; Start at 0s, dur 3.5s, Note 60, Amp 0.8
+i 1 0.0 3.5 60 0.8
+
+; Loop starts over at dur (3.5) + 0.5 = 4.0s
+i 1 4.0 3.5 60 0.8
 </CsScore>
-
 </CsoundSynthesizer>
-
-
-
-
-<bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>100</x>
- <y>100</y>
- <width>320</width>
- <height>240</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="background">
-  <r>240</r>
-  <g>240</g>
-  <b>240</b>
- </bgcolor>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>

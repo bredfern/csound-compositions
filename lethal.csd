@@ -2,7 +2,7 @@
 <CsOptions>
 ; Select audio/midi flags here according to platform
 ; Audio out   Audio in    No messages
--odac -d -m0d --midi-key-cps=4 --midi-velocity-amp=5 -F /home/bredfern/Music/midi/lethAL.mid
+-odac -d -m0d --midi-key-cps=4 --midi-velocity-amp=5 -F assets/lethal.mid
 ; For Non-realtime ouput leave only the line below:
 ; -o midiin.wav -W ;;; for file output any platform
 </CsOptions>
@@ -16,7 +16,6 @@ nchnls = 2
 massign 1, -1; prevent triggering of instrument with MIDI
 
 instr 200
-
     kMode = 0
     kTempo = 8
     kNote, kTrigger midiarp kTempo

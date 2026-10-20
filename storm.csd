@@ -26,7 +26,7 @@ kpres    rspline  ipres1,ipres2,0.5,0.6
 krat     =        100 
 kvibf    =        0.5 
 kvibamp  =        0.5 
-iminfreq =        300
+iminfreq =        100
 ; call the wgbow opcode
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
 ; modulating delay time
@@ -80,13 +80,13 @@ f 1 0 32768 10 1
 
 t 0 40
 
-i "ocean"  0 280 580 0.03 0.2
-i "ocean"  0 .   405 0.03 0.3
-i "ocean"  0 .   600 0.03 0.09
+i "ocean"  0 280 580 0.01 0.2
+i "ocean"  0 .   405 0.02 0.3
+i "ocean"  0 .   600 0.01 0.09
 i "ocean"  0 .   635 0.03 0.09
 i "ocean"  0 .   670 0.02 0.09
-i "ocean"  0 .   602 0.04 0.13
-i "ocean"  0 .   633 0.05 0.11
+i "ocean"  0 .   602 0.01 0.13
+i "ocean"  0 .   633 0.01 0.11
 
 i "thunder" 3 3 0.010 
 i "thunder" + 10 0.010
@@ -124,6 +124,8 @@ i "reverb2" 0 280
 
 </CsScore>
 </CsoundSynthesizer>
+
+
 
 
 <bsbPanel>
