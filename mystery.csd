@@ -66,7 +66,7 @@ endin
 
  instr 5; wgbow instrument
 kamp     =        0.3
-kfreq    =        rnd(200)
+kfreq    =        rnd(600)
 kpres    =        0.2
 krat     rspline  0.006,0.988,0.1,0.4
 kvibf    =        4.5

@@ -8,6 +8,12 @@ ksmps = 16
 nchnls = 2
 0dbfs = 1
 
+; Seed random numbers for unpredictable bird calls
+seed 540
+
+; Global variable for the reverb send bus
+gaSend init 0
+
 giSine    ftgen     0, 0, 2^10, 10, 1
 
 instr 1 
@@ -70,7 +76,20 @@ kpres    vdel_k   kpres,kdel,0.2,2
 aSigR    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,giSine,iminfreq
          outs     aSigL,aSigR
 endin
+
+instr 99 ; Global Reverb (Dock Environment)
+    ; reverbsc arguments: inputL, inputR, feedback_level, cutoff_frequency
+    aRevL, aRevR reverbsc gaSend, gaSend, 0.98, 8000
+    
+    ; Output the wet reverberated signal
+    outs aRevL, aRevR
+    
+    ; Clear the global bus for the next control cycle
+    clear gaSend
+endin
 </CsInstruments>
+
+
 <CsScore>
 ;          pch       amp
 f 1 0 1024 10 1 ; sine
@@ -143,23 +162,7 @@ i 4  10 484 135 0.03 0.09
 i 4  10 481 170 0.02 0.09
 i 4  10 482 202 0.04 0.1
 i 4  10 483 233 0.05 0.11
-
+i 99 0 10.0
 </CsScore>
 </CsoundSynthesizer>
-<bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>100</x>
- <y>100</y>
- <width>320</width>
- <height>240</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="background">
-  <r>240</r>
-  <g>240</g>
-  <b>240</b>
- </bgcolor>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>
+

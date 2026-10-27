@@ -16,7 +16,7 @@ nchnls = 2
 instr 1
 
 kamp = p4
-kfreq = 880
+kfreq = rnd(880)
 kc1 = p5
 kc2 = p6
 kvdepth = 0.005
@@ -29,7 +29,7 @@ endin
 instr 2
 
 kamp = p4
-kfreq = 880
+kfreq = rnd(880)
 kc1 = p5
 kc2 = p6
 kvdepth = 0.005
