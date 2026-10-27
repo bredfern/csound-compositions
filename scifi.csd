@@ -14,7 +14,7 @@ instr MassSpring
  ;initial values
  a0        init      0
  a1        init      0.05
- kc        randomi   .001, .05, 8, 3
+ kc        randomi   .001, .05, 89, 3
  ;calculation of the next value
  a2        =         a1+(a1-a0) - kc*a1
            outs      a0, a0
@@ -27,24 +27,3 @@ endin
 i "MassSpring" 0 10
 </CsScore>
 </CsoundSynthesizer>
-;example by joachim heintz
-
-
-
-<bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>100</x>
- <y>100</y>
- <width>320</width>
- <height>240</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="background">
-  <r>240</r>
-  <g>240</g>
-  <b>240</b>
- </bgcolor>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>

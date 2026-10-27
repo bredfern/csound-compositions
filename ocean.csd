@@ -61,7 +61,7 @@ instr 2
 
   CALL_START:
   ; Randomize fundamental pitch and chirp sweep duration
-  iBaseFreq random 1800, 3200
+  iBaseFreq random 2000, 3200
   iDuration random 0.15, 0.4
 
   ; Amplitude envelope for brief chirps
@@ -78,14 +78,14 @@ instr 2
 
   ; Pan bird calls randomly across the visual field
   ipan random 0.1, 0.9
-  outs abird * ipan, abird * (1 - ipan)
+  outs 10*abird * ipan, abird * (1 - ipan)
 endin
 
 
 
 instr 99 ; Global Reverb (Dock Environment)
     ; reverbsc arguments: inputL, inputR, feedback_level, cutoff_frequency
-    aRevL, aRevR reverbsc gaSend, gaSend, 0.78, 8000
+    aRevL, aRevR reverbsc gaSend, gaSend, 0.98, 8000
     
     ; Output the wet reverberated signal
     outs aRevL, aRevR

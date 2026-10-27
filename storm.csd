@@ -16,16 +16,46 @@ gisine  ftgen   0,0,4096,10,1
 gaSendL,gaSendR init 0
 gaRvbSend    init      0 ; global audio variable initialized to zero
 
+instr 1
+  ; 1. Ambient Background Swells
+  awhite unirand 12.0
+  awhite = awhite
+  apink pinkish awhite
+
+  klfo_slow lfo 0.5, 0.12, 0
+  
+
+  kcutoff = 120 + (klfo_slow * 100)
+  aocean butterlp apink, kcutoff
+  aocean = aocean * 5 + ((klfo_slow * 0.4) + 0.05)
+
+  ; 2. Periodic Wave Crashes (Slightly randomized trigger)
+  kcrashtrig metro 0.1 ; Triggers roughly every 10 seconds
+  kcrashenv expseg 0.001, 0.05, 1.0, 1.5, 0.1, 30.0, 0.001 ; Rapid attack, slow decay
+  
+  ; Filter for crash: bright/hissing white noise opening up dramatically
+  kcrashfilter = kcrashenv
+  acrash butterlp awhite, kcrashfilter
+  acrash = acrash * kcrashenv
+
+  ; Combine Ocean & Crashes
+  amix = 0.25 * aocean + acrash
+
+  ; Gentle panning
+  kpan lfo 0.2, 0.07, 0
+  outs amix * kpan, amix * kpan
+endin
+
 instr ocean ; wgbow instrument turned into water sound
-kamp     =        0.25
+kamp     =        0.125
 kfreq    =        p4
 ipres1   =        p5
 ipres2   =        p6
 
 kpres    rspline  ipres1,ipres2,0.5,0.6
-krat     =        100 
+krat     =        0.25
 kvibf    =        0.5 
-kvibamp  =        0.5 
+kvibamp  =        0.25 
 iminfreq =        100
 ; call the wgbow opcode
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
@@ -43,12 +73,12 @@ endin
 
 instr thunder
 
-kamp = 0.1
+kamp = 0.15
 kfreq = p4 
 kc1 = 12
 kc2 = 3
-kvdepth = 100
-kvrate = 100
+kvdepth = 1
+kvrate = 0.241
 
 asig fmbell kamp, kfreq, kc1, kc2, kvdepth, kvrate
 
@@ -79,6 +109,7 @@ aRvbL,aRvbR reverbsc gaSendL,gaSendR,0.9,1000
 f 1 0 32768 10 1
 
 t 0 40
+i 1 0 280
 
 i "ocean"  0 280 580 0.01 0.2
 i "ocean"  0 .   405 0.02 0.3
@@ -124,24 +155,3 @@ i "reverb2" 0 280
 
 </CsScore>
 </CsoundSynthesizer>
-
-
-
-
-<bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>100</x>
- <y>100</y>
- <width>320</width>
- <height>240</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="background">
-  <r>240</r>
-  <g>240</g>
-  <b>240</b>
- </bgcolor>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>

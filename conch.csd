@@ -1,7 +1,8 @@
 <CsoundSynthesizer>
 <CsOptions>
 ; Send audio output to your default soundcard
--odac 
+;-odac 
+-odac -d -m0d --midi-key-cps=4 --midi-velocity-amp=5 -F assets/conch.mid
 </CsOptions>
 
 <CsInstruments>
