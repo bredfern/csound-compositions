@@ -15,7 +15,7 @@ gaRvbSend init 0
 
 instr Ghosts
 
- kC randomi rnd(30), rnd(50), 1, 2, 4
+ kC randomi 100, 100, 1, 2, 4
  kR randomi 1, 2, 2, 3
  kI randomi 1, 5, randomi:k(3,1,1,3), 3
 
@@ -41,9 +41,9 @@ ipres1   =        p5
 ipres2   =        p6 
 ; kpres (bow pressure) defined using a random spline
 kpres    rspline  p5,p6,0.5,2
-krat     =        0.127236
-kvibf    =        4.5
-kvibamp  =        0.1
+krat     =        0.5 
+kvibf    =        0.5
+kvibamp  =        0.5
 iminfreq =        10
 ; call the wgbow opcode
 aSigL    wgbow    kamp,kfreq,kpres,krat,kvibf,kvibamp,gisine,iminfreq
