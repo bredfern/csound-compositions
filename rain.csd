@@ -13,7 +13,7 @@ instr 1
 
     ; Slowly vary the filter and volume for gusts
     kCut   randomi 400, 2500, 0.12
-    kLevel randomi 0.15, 0.8, 0.08
+    kLevel randomi 1, 0.8, 0.08
 
     aWind tone aNoise, kCut
     aWind = aWind * kLevel * p4
@@ -26,7 +26,7 @@ endin
 </CsInstruments>
 <CsScore>
 ; Instrument, start, duration, amplitude
-i1 0 30 0.3
+i1 0 300 0.3
 e
 </CsScore>
 </CsoundSynthesizer>
