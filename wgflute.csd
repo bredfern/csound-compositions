@@ -33,6 +33,8 @@ f 1 0 16384 10 1		;sine wave
 
 i 1 0 2 0.001 200		;more air jet
 i 1 + 2 0.001 140 
+i 1 . 3 0.003 230
+i 1 . 1 0.002 300
 e
 </CsScore>
 </CsoundSynthesizer>

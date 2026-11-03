@@ -15,7 +15,7 @@ gaRvbSend init 0
 
 instr Ghosts
 
- kC randomi 100, 100, 1, 2, 4
+ kC randomi rnd(1800), rnd(1000), 1, 2, 4
  kR randomi 1, 2, 2, 3
  kI randomi 1, 5, randomi:k(3,1,1,3), 3
 
