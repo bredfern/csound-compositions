@@ -40,7 +40,7 @@ instr 1
   acrash = acrash * kcrashenv
 
   ; Combine Ocean & Crashes
-  amix = 0.5 * aocean + acrash
+  amix = 0.25 * aocean + acrash
 
   ; Gentle panning
   kpan lfo 0.2, 0.07, 0
@@ -105,6 +105,8 @@ i 2 0 800
 e
 </CsScore>
 </CsoundSynthesizer>
+
+
 
 
 

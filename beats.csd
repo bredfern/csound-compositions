@@ -110,6 +110,10 @@ i 4 1.0  0.1 3
 i 4 1.5  0.1 3
 i 4 2.0  0.2 1
 i 4 2.5  0.1 3
+i 4 3.0  0.2 1
+i 4 3.5  0.2 3
+i 4 4.0  0.1 2
+i 4 4.5  0.2 3
 
 ; ===================================================================
 ; BASS LINE (Distorted Driving Synth)
@@ -118,9 +122,9 @@ i 4 2.5  0.1 3
 i 1 0.0 0.4 36 0.8
 i 1 0.5 0.4 36 0.8
 i 1 1.0 0.4 36 0.8
-i 1 1.5 0.4 38 0.8
+i 1 1.5 0.4 36 0.8
 i 1 2.0 0.4 36 0.8
-i 1 2.5 0.4 39 0.8
+i 1 2.5 0.4 36 0.8
 
 ; ===================================================================
 ; PAD / VOX
@@ -135,3 +139,20 @@ e
 
 </CsScore>
 </CsoundSynthesizer>
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>
